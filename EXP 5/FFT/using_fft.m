@@ -1,0 +1,61 @@
+clc;
+close all;
+
+fprintf('Sampling and Aliasing effect\n');
+f1=input('Enter the frequency of frequency-1:');
+f2=input('Enter the frequency of frequency-2:');
+f3=input('Enter the frequency of frequency-3:');
+fs=input('Enter the Sampling Frequency:');
+N=input('Enter the no.of Samples:');
+
+subplot(2,2,1);
+n=(0:N-1);
+signal=cos(2*pi*(f1/fs)*n)+cos(2*pi*(f2/fs)*n)+cos(2*pi*(f3/fs)*n);
+signal=fft(signal);
+val_signal=abs(signal);
+n1=0:N/2-1;
+f=(n1*fs)/N;
+signal_plot=20*log10(val_signal(1:N/2));
+plot(f,signal_plot);
+title('FFT-Sampled Frequency');
+xlabel('Frequency(Hz)');
+ylabel('Power');
+
+subplot(2,2,3);
+fs=2*f3;
+signal=cos(2*pi*(f1/fs)*n)+cos(2*pi*(f2/fs)*n)+cos(2*pi*(f3/fs)*n);
+signal=fft(signal);
+val_signal=abs(signal);
+n1=0:N/2-1;
+f=(n1*fs)/N;
+signal_plot=20*log10(val_signal(1:N/2));
+plot(f,signal_plot);
+title('FFT-Nquist Sampled Frequency');
+xlabel('Frequency(Hz)');
+ylabel('Power');
+
+subplot(2,2,4);
+fs=4*f3;
+signal=cos(2*pi*(f1/fs)*n)+cos(2*pi*(f2/fs)*n)+cos(2*pi*(f3/fs)*n);
+signal=fft(signal);
+val_signal=abs(signal);
+n1=0:N/2-1;
+f=(n1*fs)/N;
+signal_plot=20*log10(val_signal(1:N/2));
+plot(f,signal_plot);
+title('FFT-Over Sampled Frequency');
+xlabel('Frequency(Hz)');
+ylabel('Power');
+
+subplot(2,2,2);
+fs=f3/1.5;
+signal=cos(2*pi*(f1/fs)*n)+cos(2*pi*(f2/fs)*n)+cos(2*pi*(f3/fs)*n);
+signal=fft(signal);
+val_signal=abs(signal);
+n1=0:N/2-1;
+f=(n1*fs)/N;
+signal_plot=20*log10(val_signal(1:N/2));
+plot(f,signal_plot);
+title('FFT-Under Sampled Frequency');
+xlabel('Frequency(Hz)');
+ylabel('Power');
