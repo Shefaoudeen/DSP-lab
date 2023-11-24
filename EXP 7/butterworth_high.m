@@ -1,15 +1,15 @@
 close all;
 clc;
 
-fprintf('IIR-Butterworth Filter using Bilinear transformation\n');
+fprintf('IIR-Butterworth Highpass Filter using impulse invariant transformation\n');
 ap=input('Enter pass band ripple in db:');
 as=input('Enter the stop band attenuation:');
 wp=input('Enter the pass band edge frequency:');
 ws=input('Enter the stop band edge frequency:');
 Ts=input('Enter the sampling time period:');
 
-omgp=tan(wp/2);
-omgs=tan(ws/2);
+omgp=(wp/Ts);
+omgs=(ws/Ts);
 [N,Wn]=buttord(omgp,omgs,ap,as,'s');
 
 fprintf('The order of the filter is:\n');
@@ -60,23 +60,21 @@ xlabel('Normalised Frequency');
 ylabel('Angle in Radians');
 
 %{
-    IIR-Butterworth Filter using Bilinear transformation
-    
+IIR-Butterworth Highpass Filter using impulse invariant transformation
 Enter pass band ripple in db:4.436
 Enter the stop band attenuation:20
 Enter the pass band edge frequency:0.7*pi
 Enter the stop band edge frequency:0.35*pi
 Enter the sampling time period:0.1
 The order of the filter is:
-     2
+     3
 
 The cut-off frequency of the filter is:
-    1.9330
+   23.6496
 
 The order of the filter is:
-     2
+     3
 
 The cut-off frequency of the filter is:
-    1.9626
-
+   21.9911
 %}
